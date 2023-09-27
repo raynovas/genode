@@ -5,6 +5,10 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
+  build:
+    steps:
+      - sonarcloud/scan
+    
   say-hello:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
@@ -20,7 +24,11 @@ jobs:
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.3
+
 workflows:
-  say-hello-workflow:
+  main:
     jobs:
-      - say-hello
+      - build:
+          context: SonarCloud
