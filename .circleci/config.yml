@@ -6,6 +6,8 @@ version: 2.1
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   build:
+    docker:
+    - image: cimg/base:stable
     steps:
       - sonarcloud/scan
     
